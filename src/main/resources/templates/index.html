@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -106,11 +106,8 @@ http://www.templatemo.com/tm-475-holiday
 										<div class="form-group">
 							            	 <select class="form-control">
 							            	 	<option value="">-- Select Hotel -- </option>
-							            	 	<option value="shangrila">Shangri-La</option>
-												<option value="chatrium">Chatrium</option>
-												<option value="fourseasons">Four Seasons</option>
-												<option value="hilton">Hilton</option>
-											</select> 
+							            	 	<option  th:each="hotel : ${hotels}" th:text="${hotel.getName()}" th:value="${hotel.getId()}">Shangri-La</option>
+											</select>
 							          	</div>
 							          	<div class="form-group">
 							                <div class='input-group date' id='datetimepicker1'>

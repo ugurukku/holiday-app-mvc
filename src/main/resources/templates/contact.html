@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -104,7 +104,7 @@ http://www.templatemo.com/tm-475-holiday
 			</div>
 			<div class="row">
 				<!-- contact form -->
-				<form action="#" method="post" class="tm-contact-form">
+				<form th:action="@{/contacts}" method="post" th:object="${contactRequest}" class="tm-contact-form">
 					<div class="col-lg-6 col-md-6">
 						<div id="google-map"></div>
 						<div class="contact-social">
@@ -117,16 +117,16 @@ http://www.templatemo.com/tm-475-holiday
 					</div> 
 					<div class="col-lg-6 col-md-6 tm-contact-form-input">
 						<div class="form-group">
-							<input type="text" id="contact_name" class="form-control" placeholder="NAME" />
+							<input th:field="*{name}" type="text" id="contact_name" class="form-control" placeholder="NAME" />
 						</div>
 						<div class="form-group">
-							<input type="email" id="contact_email" class="form-control" placeholder="EMAIL" />
+							<input th:field="*{email}" type="email" id="contact_email" class="form-control" placeholder="EMAIL" />
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="SUBJECT" />
+							<input th:field="*{subject}" type="text" id="contact_subject" class="form-control" placeholder="SUBJECT" />
 						</div>
 						<div class="form-group">
-							<textarea id="contact_message" class="form-control" rows="6" placeholder="MESSAGE"></textarea>
+							<textarea th:field="*{message}" id="contact_message" class="form-control" rows="6" placeholder="MESSAGE"></textarea>
 						</div>
 						<div class="form-group">
 							<button class="tm-submit-btn" type="submit" name="submit">Submit now</button> 
@@ -148,6 +148,17 @@ http://www.templatemo.com/tm-475-holiday
 	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>			<!-- flexslider js -->
 	<script type="text/javascript" src="js/templatemo-script.js"></script>      		<!-- Templatemo Script -->
 	<script>
+
+	    function callToast() {
+      alert("Ugurla elave edildi");
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const specificParamValue = urlParams.get("success");
+    if (specificParamValue !== null) {
+        callToast();
+    }
+
 		/* Google map
       	------------------------------------------------*/
       	var map = '';
